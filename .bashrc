@@ -91,3 +91,6 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
 alias loadenv='set -a; source .env; set +a'
+
+# opencode
+export PATH=/home/sven/.opencode/bin:$PATH
