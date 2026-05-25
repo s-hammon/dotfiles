@@ -163,3 +163,8 @@ end, {
     end, names)
   end,
 })
+
+-- color terminal when using ":!"
+vim.api.nvim_create_user_command("X", function(opts)
+  vim.cmd("botright split | term " .. opts.args)
+end, { nargs = "+" })
