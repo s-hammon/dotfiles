@@ -14,6 +14,7 @@ vim.o.list = true
 vim.o.undofile = true
 
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.shortmess:append("I")
 
 vim.o.inccommand = "split"
 vim.o.scrolloff = 10

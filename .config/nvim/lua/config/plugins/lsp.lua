@@ -150,6 +150,12 @@ return {
             end,
           },
         },
+        sqls = {
+          root_markers = {
+            ".sqls.yml",
+            ".git",
+          },
+        },
       }
 
       local mason_lspconfig = require("mason-lspconfig")
