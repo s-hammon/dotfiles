@@ -71,6 +71,9 @@ vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "E[x]ecute lua selection" }
 -- format JSON with jq
 vim.keymap.set("n", "<leader>jq", ":%!jq .<CR>", { desc = "Format JSON with jq" })
 
+-- get list of all diagnostics in current buffer
+vim.keymap.set("n", "<M-w>l", vim.diagnostic.setloclist, { desc = "Set location list with diagnostics" })
+
 -- [[ Autocommands ]]
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
