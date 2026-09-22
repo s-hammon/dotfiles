@@ -4,4 +4,3 @@ set.shiftwidth = 2
 set.tabstop = 2
 set.expandtab = true
 set.number = true
-set.formatprg = "jq"

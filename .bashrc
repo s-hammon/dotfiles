@@ -23,7 +23,8 @@ alias grep='grep --color=auto'
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/go/bin
+gopath=$(go env GOPATH)/bin
+export PATH="$PATH:$gopath"
 
 # Mason
 export PATH=$PATH:$HOME/.local/share/nvim/mason/bin
@@ -32,10 +33,10 @@ export PATH=$PATH:$HOME/.local/share/nvim/mason/bin
 export PATH="$PATH:/home/sven/.turso"
 
 # Python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/sven/google-cloud-sdk/path.bash.inc' ]; then . '/home/sven/google-cloud-sdk/path.bash.inc'; fi
@@ -44,43 +45,44 @@ if [ -f '/home/sven/google-cloud-sdk/path.bash.inc' ]; then . '/home/sven/google
 if [ -f '/home/sven/google-cloud-sdk/completion.bash.inc' ]; then . '/home/sven/google-cloud-sdk/completion.bash.inc'; fi
 
 # --------------------------- Pyenv stuff ---------------------------
+# no longer used--bye, pyenv :(
 #
-pyenv_activate() {
-    bname=${PWD##*/}
-    pyenv activate "$bname"
-    echo "venv: ${bname}"
-}
-alias pyenv-activate=pyenv_activate
-
-pyenv_make() {
-    local python_version
-
-    # look for file version
-    if [[ -f .python-version ]]; then
-        python_version="$(head -n 1 .python-version)"
-    # look for local version
-    elif
-        python_version="$(pyenv local 2>/dev/null | head -n 1)"
-        [[ -n "$python_version" ]]
-    then
-        :
-    # default to global
-    elif
-        python_version="$(pyenv global 2>/dev/null | head -n 1)"
-        [[ -n "$python_version" ]]
-    then
-        :
-    else
-        echo "Error: Could not determine Python version (.python-version, pyenv local, or pyenv global not found)." >&2
-        return 1
-    fi
-
-    echo "Using Python $python_version to create virtualenv: ${PWD##*/}"
-    pyenv virtualenv "$python_version" "${PWD##*/}" || return 1
-    pyenv activate "${PWD##*/}" || return 1
-}
-
-alias pyenv-make=pyenv_make
+# pyenv_activate() {
+#     bname=${PWD##*/}
+#     pyenv activate "$bname"
+#     echo "venv: ${bname}"
+# }
+# alias pyenv-activate=pyenv_activate
+#
+# pyenv_make() {
+#     local python_version
+#
+#     # look for file version
+#     if [[ -f .python-version ]]; then
+#         python_version="$(head -n 1 .python-version)"
+#     # look for local version
+#     elif
+#         python_version="$(pyenv local 2>/dev/null | head -n 1)"
+#         [[ -n "$python_version" ]]
+#     then
+#         :
+#     # default to global
+#     elif
+#         python_version="$(pyenv global 2>/dev/null | head -n 1)"
+#         [[ -n "$python_version" ]]
+#     then
+#         :
+#     else
+#         echo "Error: Could not determine Python version (.python-version, pyenv local, or pyenv global not found)." >&2
+#         return 1
+#     fi
+#
+#     echo "Using Python $python_version to create virtualenv: ${PWD##*/}"
+#     pyenv virtualenv "$python_version" "${PWD##*/}" || return 1
+#     pyenv activate "${PWD##*/}" || return 1
+# }
+#
+# alias pyenv-make=pyenv_make
 
 # QC Compiler
 export QC_STDLIB="/usr/share/qc"
@@ -96,6 +98,7 @@ alias loadenv='set -a; source .env; set +a'
 export PATH=/home/sven/.opencode/bin:$PATH
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 alias sudonvim='sudo -E -s nvim'
+alias ollama='docker exec -it ollama ollama'
